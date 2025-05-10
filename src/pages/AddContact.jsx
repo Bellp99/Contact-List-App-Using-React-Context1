@@ -8,7 +8,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import useGlobalReducer from "../hooks/useGlobalReducer";
-import { addContact } from "../pages/fetch";
+import { addContact } from "../lib/fetch";
 
 export const AddContact = () => {
     const [contactName, setContactName] = useState('');
@@ -38,7 +38,6 @@ export const AddContact = () => {
                     type="text" 
                     className="form-control" 
                     id="contactAddress" 
-                    placeholder="xample.com"
                     value={contactAddress}
                     onChange={e => setContactAddress(e.target.value)}
                      />
@@ -49,7 +48,7 @@ export const AddContact = () => {
                     type="text" 
                     className="form-control" 
                     id="contactPhone" 
-                    placeholder="xample.com"
+                    placeholder="000-000-0000"
                     value={contactPhone}
                     onChange={e => setContactPhone(e.target.value)}
                      />
@@ -60,7 +59,7 @@ export const AddContact = () => {
                     type="email" 
                     className="form-control" 
                     id="contactEmail" 
-                    placeholder="xample.com"
+                    placeholder="nombre@gmail.com"
                     value={contactEmail}
                     onChange={e => setContactEmail(e.target.value)}
                      />

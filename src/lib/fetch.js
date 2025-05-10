@@ -12,6 +12,8 @@ export const fetchAllContacts = async (dispatch) => {
                 type: 'fetchedContacts',
                 payload: data.contacts,
             })
+            return data;
+
         }
         catch (error) {
             console.error("Error getting agenda. Check if URL is incorrect or if agenda doesnt exist.", error)
@@ -64,12 +66,10 @@ export const deletedContact = async(id, dispatch) => {
         if(!response.ok){
             throw new Error('Error deleting contact!', response.status)
         }
-        const data = await response.json();
         dispatch({
             type: 'deletedContact',
             payload: { id: id},
         });
-        return data;
     }
     catch(error) {
         console.error('Error deleting contact to the agenda.', error)

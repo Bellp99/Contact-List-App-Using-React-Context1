@@ -32,7 +32,7 @@ export default function storeReducer(store, action = {}) {
           const { id } = action.payload;
           return {
             ...store,
-            contacts: store.contact.filter(contact => contact.id !== id)
+            contacts: store.contacts.filter(contact => contact.id !== id)
           }
       default:
         throw Error('Unknown action.');
