@@ -9,36 +9,16 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import useGlobalReducer from "../hooks/useGlobalReducer";
 import { ContactCard } from "../components/ContactCard";
+import { fetchAllContacts, deletedContact } from "./fetch";
 
 export const Contact = () => {
     const { store, dispatch } = useGlobalReducer();
 
     useEffect(() => {
-        fetchAllContacts();
+        fetchAllContacts(dispatch);
     }, [])
 
-    const fetchAllContacts = async () => {
-        const response = await fetch(`https://playground.4geeks.com/contact/agendas/anabell/contacts`)
-        try {
-            if(!response.ok){
-                throw new Error(response.status)
-            }
-            const data = await response.json();
-            console.log(data.contacts);
-            //we need to be abel to save the contacts in the store
-            //To accomplish this, we need to create a dispatch to set the contacts key in the store
-            dispatch({
-                type: 'fetchedContacts',
-                payload: data.contacts,
-            })
-        }
-        catch (error) {
-            console.error("Error getting agenda. Check if URL is incorrect or if agenda doesnt exist.", error)
-
-        }
-    }
-
-
+    
     return (
         
         <>
@@ -57,8 +37,9 @@ export const Contact = () => {
                                         phone={contact.phone}
                                         email={contact.email}
                                     />
+                                    
                                     <button>Edit</button>
-                                    <button>Delete</button>
+                                    <button onClick={() => deletedContact(contact.id, dispatch)}>Delete</button>
                                 </div>
                         )
                     })

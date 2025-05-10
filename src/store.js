@@ -20,7 +20,21 @@ export default function storeReducer(store, action = {}) {
         ...store,
         contacts: [...contactArray]
       }
-    default:
-      throw Error('Unknown action.');
+      case 'createdContact':
+        const newContact = action.payload;
+        return{
+          ...store,
+          contacts: [...store.contacts, newContact]
+        }
+      case 'editedContact':
+         break;
+      case 'deletedContact':
+          const { id } = action.payload;
+          return {
+            ...store,
+            contacts: store.contact.filter(contact => contact.id !== id)
+          }
+      default:
+        throw Error('Unknown action.');
   }    
 }

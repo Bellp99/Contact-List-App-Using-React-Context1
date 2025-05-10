@@ -8,21 +8,21 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import useGlobalReducer from "../hooks/useGlobalReducer";
-
-
+import { addContact } from "../pages/fetch";
 
 export const AddContact = () => {
     const [contactName, setContactName] = useState('');
     const [contactAddress, setContactAddress] = useState('');
     const [contactPhone, setContactPhone] = useState('');
     const [contactEmail, setContactEmail] = useState('');
+    const {store, dispatch} = useGlobalReducer();
 
       
     return (
         <>
         <form>
             <div className="mb-3 container">
-                <label htmlFor="contactName" className="form-label">Email address</label>
+                <label htmlFor="contactName" className="form-label">Name:</label>
                 <input 
                     type="text" 
                     className="form-control" 
@@ -68,10 +68,13 @@ export const AddContact = () => {
             <button
                 type='submit'
                 className='btn btn-success'
-                onClick=''
-                >
+                onClick={() => addContact(contactName, contactAddress, contactEmail, contactPhone, dispatch)}
+                >Submit
             </button>
         </form>
+        <Link to="/">
+            Go back home
+        </Link>
         </>
     );
 }
