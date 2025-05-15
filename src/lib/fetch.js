@@ -56,6 +56,8 @@ export const addContact = async(name, address, phone, email, dispatch) => {
     }
 }
 
+//DELETE CONTACTS
+
 export const deletedContact = async(id, dispatch) => {
     const options = {
         method: 'DELETE',
@@ -76,3 +78,33 @@ export const deletedContact = async(id, dispatch) => {
 
     }
 }
+
+// EDIT CONTACT
+
+export const editContact = async (id, updatedData, dispatch) => {
+    const options = {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedData),
+    };
+
+    try {
+        const response = await fetch(`https://playground.4geeks.com/contact/agendas/anabell/contacts/${id}`, options);
+        if (!response.ok) {
+            throw new Error(`Error updating contact! Status: ${response.status}`);
+        }
+        const data = await response.json();
+
+        dispatch({
+            type: 'updatedContact',
+            payload: { id, ...updatedData },
+        });
+
+        return data;
+    } catch (error) {
+        console.error('Error updating contact in the agenda.', error);
+    }
+};
+

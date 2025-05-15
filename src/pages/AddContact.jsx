@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 import useGlobalReducer from "../hooks/useGlobalReducer";
 import { addContact } from "../lib/fetch";
 
-export const AddContact = () => {
+export const AddContact = ({ mode = "add" }) => {
     const [contactName, setContactName] = useState('');
     const [contactAddress, setContactAddress] = useState('');
     const [contactPhone, setContactPhone] = useState('');
@@ -22,7 +22,7 @@ export const AddContact = () => {
         <>
         <form>
             <div className="mb-3 container">
-                <label htmlFor="contactName" className="form-label">Name:</label>
+            <label htmlFor="contactName" className="form-label">Name:</label>
                 <input 
                     type="text" 
                     className="form-control" 
@@ -31,8 +31,8 @@ export const AddContact = () => {
                     value={contactName}
                     onChange={e => setContactName(e.target.value)}
                      />
-            </div>
-            <div className="mb-3 container">
+           
+         
                 <label htmlFor="contactAddress" className="form-label">Address</label>
                 <input 
                     type="text" 
@@ -41,8 +41,7 @@ export const AddContact = () => {
                     value={contactAddress}
                     onChange={e => setContactAddress(e.target.value)}
                      />
-            </div>
-            <div className="mb-3 container">
+         
                 <label htmlFor="contactPhone" className="form-label">Phone</label>
                 <input 
                     type="text" 
@@ -52,8 +51,7 @@ export const AddContact = () => {
                     value={contactPhone}
                     onChange={e => setContactPhone(e.target.value)}
                      />
-            </div>
-            <div className="mb-3 container">
+      
                 <label htmlFor="contactEmail" className="form-label">Email address</label>
                 <input 
                     type="email" 
@@ -63,14 +61,16 @@ export const AddContact = () => {
                     value={contactEmail}
                     onChange={e => setContactEmail(e.target.value)}
                      />
-            </div>
+            
             <button
                 type='submit'
                 className='btn btn-success'
                 onClick={() => addContact(contactName, contactAddress, contactEmail, contactPhone, dispatch)}
                 >Submit
             </button>
-        </form>
+         </div>
+         </form>
+       
         <Link to="/">
             Go back home
         </Link>

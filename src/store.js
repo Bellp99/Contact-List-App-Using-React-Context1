@@ -6,7 +6,7 @@ export const initialStore=()=>{
 
 export default function storeReducer(store, action = {}) {
   switch(action.type){
- //   case 'add_task':
+
 
   //    const { id,  color } = action.payload
 
@@ -27,7 +27,14 @@ export default function storeReducer(store, action = {}) {
           contacts: [...store.contacts, newContact]
         }
       case 'editedContact':
-         break;
+        return {
+                ...state,
+                contacts: store.contacts.map(contact =>
+                    contact.id === action.payload.id
+                        ? { ...contact, ...action.payload }
+                        : contact
+                ),
+            };
       case 'deletedContact':
           const { id } = action.payload;
           return {
