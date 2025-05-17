@@ -7,13 +7,6 @@ export const initialStore=()=>{
 export default function storeReducer(store, action = {}) {
   switch(action.type){
 
-
-  //    const { id,  color } = action.payload
-
-    //  return {
-    //    ...store,
-    //    todos: store.todos.map((todo) => (todo.id === id ? { ...todo, background: color } : todo))
-    //  };
     case 'fetchedContacts':
       const contactArray = action.payload;
       return {
@@ -26,9 +19,9 @@ export default function storeReducer(store, action = {}) {
           ...store,
           contacts: [...store.contacts, newContact]
         }
-      case 'editedContact':
+      case 'updatedContact':
         return {
-                ...state,
+                ...store,
                 contacts: store.contacts.map(contact =>
                     contact.id === action.payload.id
                         ? { ...contact, ...action.payload }

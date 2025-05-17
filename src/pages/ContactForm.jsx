@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import useGlobalReducer from "../hooks/useGlobalReducer";
 import { addContact, editContact } from "../lib/fetch";
 
@@ -30,6 +30,8 @@ export const ContactForm = ({ mode = "add" }) => {
         }
     }, [mode, id, store.contacts]);
 
+
+    
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
@@ -44,20 +46,24 @@ export const ContactForm = ({ mode = "add" }) => {
             await addContact(name, address, phone, email, dispatch);
         }
 
-        navigate("/"); // Go back to contact list
+         navigate("/")// Go back to contact list
     };
 
     return (
+         
         <form onSubmit={handleSubmit} className="container mt-4">
-            <h2>{mode === "edit" ? "Edit Contact" : "Add Contact"}</h2>
-            <input name="name" value={formData.name} onChange={handleChange} placeholder="Name" required className="form-control mb-2" />
-            <input name="address" value={formData.address} onChange={handleChange} placeholder="Address" required className="form-control mb-2" />
-            <input name="phone" value={formData.phone} onChange={handleChange} placeholder="Phone" required className="form-control mb-2" />
-            <input name="email" value={formData.email} onChange={handleChange} placeholder="Email" required className="form-control mb-2" />
-            <button type="submit" className="btn btn-success">
-                {mode === "edit" ? "Update Contact" : "Add Contact"}
-            </button>
+            <h2>{mode === "edit" ? "Edit Contact" : "Add a New Contact"}</h2>
+            <input name="name" value={formData.name} onChange={handleChange} placeholder="Name" type="text" required className="form-control mb-3" />
+            <input name="address" value={formData.address} onChange={handleChange} placeholder="Address" type="text" required className="form-control mb-3" />
+            <input name="phone" value={formData.phone} onChange={handleChange} placeholder="Phone" type="text" required className="form-control mb-3" />
+            <input name="email" value={formData.email} onChange={handleChange} placeholder="Email@gmail.com" type="email" required className="form-control mb-3" />
+
+                <button type="submit" className="btn btn-outline-success mt-3">
+                    {mode === "edit" ? "Update Contact" : "Add Contact"}
+                </button>
+
         </form>
+   
     );
 };
 
